@@ -106,6 +106,43 @@
   display: flex;
 }
 
+.banner{
+  padding: 10px;
+  margin-right: 20px;
+}
+
+.banner > img {
+  width: 980px;
+  height: 450px;
+}
+
+.listBook{
+  padding: 8px 12px;
+  margin-right: 97px;
+  margin-left: 10px;
+  /* background-color: #929292; */
+}
+
+.list{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+.list-link{
+  margin-right: 35px;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: black;
+}
+
+.book-img{
+  width: 250px;
+  height: 300px;
+  border-radius: 5px;
+}
+
+
 
 /* ---------------- Side Profile ---------------- */
 
@@ -113,7 +150,7 @@
   display: flex;
   flex-direction: column;
   flex-basis: 25%;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   /* background-color: #D60000; */
   padding-top: 25px;

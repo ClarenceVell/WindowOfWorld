@@ -28,18 +28,18 @@ function SideProfile({page}) {
         <div className='sidebar'>
             <Link to={'/'} className='link-bar' >
                 <img className='icon-bar' 
-                    src={[page === 'profile'? userRed: user]} 
+                    src={ page === 'profile'? userRed: user } 
                     alt="User Icon" 
                 />
-                <span className={[page === 'profile'? 'span-bar-red':'span-bar']}>Profile</span>
+                <span className={ page === 'profile'? 'span-bar-red':'span-bar' }>Profile</span>
             </Link>
 
             <Link to={'/'} className='link-bar' >
                 <img className='icon-bar' 
-                    src={[page === 'subscribe'? subcribeRed : subcribe]} 
+                    src={ page === 'subscribe'? subcribeRed : subcribe } 
                     alt="User Icon" 
                 />
-                <span className={[page === 'subscribe'? 'span-bar-red':'span-bar']}>Subscribe</span>
+                <span className={ page === 'subscribe'? 'span-bar-red':'span-bar' }>Subscribe</span>
             </Link>
             <hr />
 
