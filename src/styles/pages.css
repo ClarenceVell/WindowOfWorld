@@ -1,0 +1,101 @@
+/* ------------------ Landing Pages ------------------ */
+
+.landingBackground{
+    background-image: url('../assets/Vector1.png');
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: 100% 0%;
+    background-size: contain;
+}
+
+.landing{
+  margin-left: 25px;
+  display: flex;
+}
+
+.landing > div {
+  flex-basis: 39%;
+}
+
+.landing > div > img {
+  width: 400px;
+  height: 400px;
+  margin-bottom: -90px;
+}
+
+.landing > div > p {
+  font-size: 24px;
+  margin-left: 12px;
+}
+
+.landingg {
+  margin-top: 30px;
+  margin-left: 37px;
+  display: flex;
+  padding-bottom: 140px;
+}
+
+/* .landingg > button:nth-child(odd) {
+  padding: 8px 40px;
+  margin-right: 50px;
+  background-color:#D60000;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+} */
+
+.landingg > button:nth-child(even) {
+  padding: 8px 40px;
+  border: 0;
+  background: rgba(205, 205, 205, 0.7);
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.signin{
+  padding: 8px 40px;
+  margin-right: 50px;
+  background-color:#D60000;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  margin-left: 100px;
+}
+
+.title-signin{
+  font-size: 36px;
+  font-family:  "Nunito", sans-serif;
+  font-weight: 800;
+}
+
+.form-signin{
+  width: 90%;
+}
+
+.form-signin > input:nth-child(odd) {
+  display: block;
+  width: 100%;
+  padding: 10px 15px 10px 7px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.form-signin > input:nth-child(even) {
+  display: block;
+  width: 100%;
+  margin-top: 18px;
+  padding: 10px 15px 10px 7px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.form-signin > button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+  background: #D60000;
+  color: #fff;
+  font-size: 18px;
+}
