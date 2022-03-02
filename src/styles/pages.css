@@ -106,6 +106,9 @@
   display: flex;
 }
 
+
+/* ---------------- Side Profile ---------------- */
+
 .profile-container{
   display: flex;
   flex-direction: column;
@@ -116,7 +119,7 @@
   padding-top: 25px;
 }
 
-.profile-container > div > img {
+.profile-container > img {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -135,6 +138,7 @@
   height: 125px;
   border-radius: 50%;
   margin-top: 3px;
+  padding-left: 3px;
   object-fit: cover;
 }
 
@@ -154,4 +158,50 @@
 .profile-container > hr {
   border: 1px solid #C9C9C9;
   width: 180px;
+}
+
+.sidebar{
+  margin-bottom: 100px;
+}
+
+.link-bar:first-child{
+  display: block;
+  text-decoration: none;
+  margin-bottom: 32px;
+  position: relative;
+  margin-top: 20px;
+}
+
+.link-bar{
+  display: block;
+  text-decoration: none;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.icon-bar{
+  margin-right: 20px;
+  width: 27px;
+  height: 27px;
+}
+
+.span-bar{
+  position: absolute;
+  margin-top: 3px;
+  font-size: 18px;
+  color: #929292;
+}
+
+.span-bar-red{
+  position: absolute;
+  margin-top: 3px;
+  font-size: 18px;
+  color: #D60000;
+}
+
+.sidebar > hr {
+  border: 1px solid #C9C9C9;
+  width: 180px;
+  margin-top: 25px;
+  margin-bottom: 20px;
 }
