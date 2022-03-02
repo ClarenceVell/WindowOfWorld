@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-import logo from '../assets/Icon (1).png'
+import logo from '../assets/logo.png'
 
 function Landing() { 
 
