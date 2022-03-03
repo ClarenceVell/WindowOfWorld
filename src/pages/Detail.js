@@ -1,20 +1,18 @@
 import React from 'react'
 
 import SideProfile from '../parts/SideProfile'
-import ListBook from '../components/ListBook'
+import DetailBook from '../components/DetailBook'
 
-import banner from '../assets/banner.png'
 
-function Home() {
+function Detail() {
   return (
     <div className='left'>
         <SideProfile />
         <div className='content'>
-            <img src={banner} alt="" />
-            <ListBook/>
+            <DetailBook/>
         </div>
     </div>
   )
 }
 
-export default Home
+export default Detail
