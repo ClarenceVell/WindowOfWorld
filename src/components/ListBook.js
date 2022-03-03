@@ -9,11 +9,11 @@ function ListBook() {
         <h1>List Book</h1>
 
         <div className='list'>
-            {list.map((body) =>{
+            {list.map((body, index) =>{
                 return(
 
-                    <Link className='list-link' to={`/detail/${body.id}`}>
-                        <img className='book-img' src={body.url} alt="yyyy" />
+                    <Link className='list-link' to={`/detail/${body.id}`} key={index + body.id}>
+                        <img className='book-img' src={body.url} alt="Book Cover" />
                         <h3>{body.title}</h3>
                         <p>{body.author}</p>
                     </Link>

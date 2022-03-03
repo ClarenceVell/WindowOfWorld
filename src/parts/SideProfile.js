@@ -26,7 +26,7 @@ function SideProfile({page}) {
         <hr />
 
         <div className='sidebar'>
-            <Link to={'/'} className='link-bar' >
+            <Link to={'/profile'} className='link-bar' >
                 <img className='icon-bar' 
                     src={ page === 'profile'? userRed: user } 
                     alt="User Icon" 

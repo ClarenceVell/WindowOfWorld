@@ -24,3 +24,18 @@ export const list = [
         author: 'Rachel Hartman'
     },
 ]
+
+export const Mylist = [
+    {
+        id: 1,
+        url: '/images/book.png',
+        title: 'Serangkai',
+        author: 'Valerie Patkar'
+    },
+    {
+        id: 2,
+        url: '/images/book2.png',
+        title: 'Z1 - Sd/Mi Buku Siswa Tematik T...',
+        author: 'Afi Yustiyanar'
+    }
+]

@@ -33,6 +33,7 @@ p, span {
 .btn{
   border-color: unset;
   border: 0;
+  font-family: "Nunito", sans-serif;
 }
 
 .modal{

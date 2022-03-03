@@ -7,6 +7,7 @@ import Landing from './pages/Landing';
 import SignIn from './components/SignIn';
 import Home from './pages/Home';
 import Detail from './pages/Detail';
+import Profile from './pages/Profile';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route exact path='/auth' element={<Landing/>} />
         <Route exact path='/signin' element={<SignIn/>} />
         <Route exact path='/detail/:id' element={<Detail/>} />
+        <Route exact path='/profile' element={<Profile/>} />
         <Route exact path='*' element={<NotFound/>} />
       </Routes>
     </>

@@ -335,4 +335,112 @@
   height: 40px;
   line-height: 40px;
   text-align: center;
+  background: rgba(205, 205, 205, 0.7);
+}
+
+/* ------------------ Profile Pages ------------------ */
+
+.profile-group{
+  display: flex;
+  background: #FFD9D9;
+  border-radius: 5px;
+  padding: 30px;
+  justify-content: space-between;
+  margin-right: 40px;
+}
+
+.profile-group > div:nth-child(2) > img {
+  display: block;
+  border-radius: 5px;
+}
+
+.profile-group > div:nth-child(2) > button {
+  width: 100%;
+  height: 40px;
+  background: #D60000;
+  border-radius: 5px;
+  margin-top: 12px;
+  color: #fff;
+  font-size: 15px;
+}
+
+.info-user > div {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.email-info > img {
+  margin-right: 14px;
+}
+
+.email-info > div {
+  height: 50px;
+}
+
+.email-info > div > p:nth-child(1){
+  margin-top: -1px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.email-info > div > p:nth-child(2) {
+  margin-top: -14px;
+  color: #8A8C90;
+  font-size: 14px;
+}
+
+.gender-info > img {
+  margin-right: 14px;
+}
+
+.gender-info > div {
+  height: 50px;
+}
+
+.gender-info > div > p:nth-child(1){
+  margin-top: -1px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.gender-info > div > p:nth-child(2) {
+  margin-top: -14px;
+  color: #8A8C90;
+  font-size: 14px;
+}
+
+.phone-info > img {
+  margin-right: 14px;
+}
+
+.phone-info > div {
+  height: 50px;
+}
+
+.phone-info > div > p:nth-child(1){
+  margin-top: -1px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.phone-info > div > p:nth-child(2) {
+  margin-top: -14px;
+  color: #8A8C90;
+  font-size: 14px;
+}
+
+.address-info > img {
+  margin-right: 14px;
+}
+
+.address-info > div {
+  height: 50px;
+}
+
+.address-info > div > p:nth-child(1){
+  margin-top: -1px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.address-info > div > p:nth-child(2) {
+  margin-top: -14px;
+  color: #8A8C90;
+  font-size: 14px;
 }

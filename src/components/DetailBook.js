@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 import addIcon from '../assets/add.png'
 import nextIcon from '../assets/V.png'
@@ -7,6 +7,7 @@ import nextIcon from '../assets/V.png'
 import { detail } from '../fakeData/detailBook'
 
 function DetailBook() {
+  const navigate = useNavigate()
   const { id } = useParams()
   const { url, title, author, date, pages, isbn } = detail[id-1]
   return (
@@ -37,7 +38,7 @@ function DetailBook() {
       </div>
 
       <div className='button-detail-group'>
-        <button className='btn'>Add to My List &nbsp; <img src={addIcon} alt="icon" /> </button>
+        <button onClick={() => navigate('/profile')} className='btn'>Add to My List &nbsp; <img src={addIcon} alt="icon" /> </button>
         <button className='btn'>Read Book &nbsp; <img src={nextIcon} alt="icon" /></button>
       </div>
     </>
