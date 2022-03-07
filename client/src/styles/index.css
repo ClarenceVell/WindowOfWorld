@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+html,
+body {
+  font-family: "Nunito", "Tahoma", "Verdana", "Gill Sans", "Gill Sans MT",
+    "Calibri", "Trebuchet MS", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background: white;
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+p, 
+span {
+  font-family: "Nunito", sans-serif;
+}
+
+.txt, .txt:focus {
+  font-family: "Nunito", sans-serif !important;
+  background-color: unset !important;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.btn, .btn:hover{
+  border-color: unset;
+  outline: none;
+  border: 0;
+  font-family: "Nunito", sans-serif;
+  box-shadow: unset !important;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+input{
+  caret-color: white;
+}
+
+.dropdown, .dropdown:hover, .dropdown:focus{
+  color: unset !important;
+  background-color: unset !important;
+  border-color: unset !important;
+  border: 0 !important;
+  box-shadow: unset !important;
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drop-img{
+  width: 47px;
+  height: 47px;
+  border-radius: 50%;
+  margin-left: 15px;
+  object-fit: cover;
+  margin-top: 5px;
+  /* margin-bottom: 10px; */
+}
+
+.dropdown-menu{
+  border-radius: 5px;
+  padding: 10px 0;
+  transform: translate(5px, 8px) !important;
+}
+
+.dropdown-menu::before {
+  position: absolute;
+  top: -12%;
+  left: 135%;
+  margin-left: -60%;
+  content: "";
+  width: 0;
+  height: 0;
+  border-bottom: solid 12px rgb(233, 228, 228);
+  border-left: solid 12px transparent;
+  border-right: solid 12px transparent;
+}
+
+.nav-adm{
+  margin-left: -25px;
+  margin-top: 10px;
+}
+
+.alert-info{
+  width: 100%;
+}
+
+.alert-danger{
+  width: 100%;
+}
