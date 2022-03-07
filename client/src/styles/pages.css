@@ -203,6 +203,7 @@
 .profile-container p:nth-child(odd) {
   font-size: 24px;
   font-weight: 800;
+  margin-top: 10px;
   font-style: normal;
 }
 
@@ -229,6 +230,7 @@
 
 .profile-container > hr {
   border: 1px solid #C9C9C9;
+  margin-top: -1px;
   width: 180px;
 }
 
@@ -704,4 +706,51 @@ th{
 
 .read-con{
   padding: 20px 70px 10px 70px;
+}
+
+/* ------------------ Update Profile Pages ------------------ */
+
+.update-form{
+ /* background-color: #0ACF83; */
+ width: 750px;
+}
+
+.update-form > div > input {
+  margin-bottom: 18px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.inp-div{
+  /* background-color: #FF0000; */
+  width: 400px;
+  padding: 10px;
+}
+
+.inp-div > h2{
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.edit-btn, .edit-btn:hover{
+  background-color: #FF0000;
+  color: white;
+  font-weight: 600;
+  padding: 7px 20px;
+}
+
+.edit-avatar{
+  height: 280px;
+  width: 260px;
+  margin-top: 20px;
+  border: 3px solid #cecdcdf6;
+  border-radius: 10px;
+}
+
+.avatar-label{
+  background-color: rgba(205, 205, 205, 0.801);
+  font-weight: bold;
+  padding: 8px;
+  border-radius: 5px;
+  margin-top: 14px;
 }

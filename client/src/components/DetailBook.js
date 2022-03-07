@@ -6,6 +6,8 @@ import nextIcon from '../assets/V.png'
 
 import { detail } from '../fakeData/detailBook'
 
+import { Mylist } from '../fakeData/listBook'
+
 function DetailBook() {
   const navigate = useNavigate()
   const { id } = useParams()
@@ -38,6 +40,11 @@ function DetailBook() {
       </div>
 
       <div className='button-detail-group'>
+
+        {/* { id != Mylist[id -1].id ? 
+          <button onClick={() => navigate('/profile')} className='btn'>Add to My List &nbsp; <img src={addIcon} alt="icon" /> </button>
+        : null} */}
+
         <button onClick={() => navigate('/profile')} className='btn'>Add to My List &nbsp; <img src={addIcon} alt="icon" /> </button>
         <button onClick={() => navigate('/read')} className='btn'>Read Book &nbsp; <img src={nextIcon} alt="icon" /></button>
       </div>

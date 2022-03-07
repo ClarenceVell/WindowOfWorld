@@ -11,6 +11,7 @@ import Subscribe from './pages/Subscribe';
 import AddBook from './pages/AddBook';
 import Transaction from './pages/Transaction';
 import ReadBook from './pages/ReadBook';
+import UpdateProfile from './pages/UpdateProfile';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route exact path='/add' element={<AddBook/>} />
         <Route exact path='/transaction' element={<Transaction/>} />
         <Route exact path='/read' element={<ReadBook/>} />
+        <Route exact path='/edit-profile' element={<UpdateProfile/>} />
         <Route exact path='*' element={<NotFound/>} />
       </Routes>
     </>

@@ -52,9 +52,9 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-input{
+/* input{
   caret-color: white;
-}
+} */
 
 .dropdown, .dropdown:hover, .dropdown:focus{
   color: unset !important;

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import SideProfile from '../parts/SideProfile'
 
@@ -7,6 +8,9 @@ import photo from '../assets/zaynn.jpg'
 import MyList from '../components/MyList'
 
 function Profile() {
+
+  const navigate = useNavigate()
+
   return (
     <>
     <div className='left'>
@@ -52,7 +56,7 @@ function Profile() {
 
               <div className='photo-div'>
                 <img src={photo} alt="profile" />
-                <button className='btn'>Edit Profile</button>
+                <button onClick={() => navigate('/edit-profile')} className='btn'>Edit Profile</button>
               </div>
             </div>
             
