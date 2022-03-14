@@ -1,8 +1,10 @@
-import React from 'react'
+import { useContext } from 'react'
 
 import profile from '../assets/zaynn.jpg'
 
 import { Link } from 'react-router-dom'
+
+import { UserContext } from '../helpers/context/userContext'
 
 import user from '../assets/user.png'
 import userRed from '../assets/userRed.png'
@@ -13,6 +15,8 @@ import subcribeRed from '../assets/billRed.png'
 import logout from '../assets/logout.png'
 
 function SideProfile({page}) {
+
+    const [ state ] = useContext(UserContext)
 
   return (
     <div className='profile-container'>
@@ -32,7 +36,7 @@ function SideProfile({page}) {
         <hr />
 
         <div className='sidebar'>
-            <Link to={'/profile'} className='link-bar' >
+            <Link to={`/profile/${state?.user?.id}`} className='link-bar' >
                 <img className='icon-bar' 
                     src={ page === 'profile'? userRed: user } 
                     alt="User Icon" 

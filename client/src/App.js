@@ -31,7 +31,11 @@ function App() {
   useEffect(() => {
     if(state.login == false){
       navigate('/auth')
-    } 
+    }else if (state.user.role == 0) {
+      navigate('/')
+    } else {
+      navigate('/transaction')
+    }
   },[state])
 
   const authUser = async () => {
@@ -78,7 +82,7 @@ function App() {
         <Route exact path='/' element={<Home/>} />
         <Route exact path='/auth' element={<Landing/>} />
         <Route exact path='/detail/:id' element={<Detail/>} />
-        <Route exact path='/profile' element={<Profile/>} />
+        <Route exact path='/profile/:id' element={<Profile/>} />
         <Route exact path='/Subscribe' element={<Subscribe/>} />
         <Route exact path='/add' element={<AddBook/>} />
         <Route exact path='/transaction' element={<Transaction/>} />
