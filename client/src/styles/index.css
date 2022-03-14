@@ -70,6 +70,10 @@ input[type="number"]::-webkit-outer-spin-button {
   justify-content: center;
 }
 
+.dropdown::after{
+  display: none !important;
+}
+
 .drop-img{
   width: 47px;
   height: 47px;
@@ -83,7 +87,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .dropdown-menu{
   border-radius: 5px;
   padding: 10px 0;
-  transform: translate(5px, 8px) !important;
+  transform: translate(12px, 8px) !important;
 }
 
 .dropdown-menu::before {

@@ -5,8 +5,9 @@ const jwt = require('jsonwebtoken')
 
 // -------------------- REGISTER --------------------
 
-exports.register = async (req, res) => {
+exports.register = async ( req, res) => {
     try {
+
         const { email, password } = req.body
         const data = req.body
 
@@ -14,52 +15,43 @@ exports.register = async (req, res) => {
             fullName: Joi.string().min(3).required(),
             email: Joi.string().email().min(6).required(),
             password: Joi.string()
-              .pattern(/^[a-zA-Z0-9]{6,30}$/)
-              .required(),
+            .pattern(/^[a-zA-Z0-9]{6,30}$/)
+            .required(),
         });
-      
+    
         const { error } = schema.validate(data);
-      
+    
         if (error) {
-        return res.send({
-            status: "Validation Failed",
-            message: error.details[0].message,
-        });
+            return res.send({
+                status: "Validation Failed",
+                message: error.details[0].message,
+            });
         }
 
-        const checkEmail = await user.findOne({
-            where : {
-                email
-            }
+        const emailExist = await user.findOne({
+            where: { email }
         })
-        
-        if (checkEmail) {
-            return res.send({
-                status : 'Failed',
-                message : "Email already registered"
+
+        if(emailExist){
+            res.status(500).send({
+                status: 'Failed',
+                message: 'Email already registered !'
             })
         }
 
-        const salt = await bcrypt.genSalt(10);
-
-        const hashedPassword = await bcrypt.hash(password, salt);
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(password, salt)
 
         const dataUser = await user.create({
             ...data,
-            password : hashedPassword
+            password: hashedPassword
         })
-
-        // const updateUser = await user.findOne({
-        //     where : {
-        //         email
-        //     }
-        // })
 
         const secretKey = process.env.SECRET_KEY
         const token = jwt.sign(
             {
-                id : dataUser.id,
-                role: dataUser.is_admin
+                id: dataUser.id,
+                role: dataUser.role
             },
             secretKey
         )
@@ -68,32 +60,36 @@ exports.register = async (req, res) => {
             status: 'Success',
             data: {
                 user: {
-                    email : dataUser.email,
+                    email: dataUser.email,
                     fullName: dataUser.fullName,
+                    role: dataUser.role,
                     token
                 }
             }
         })
+        
     } catch (error) {
-        console.log(error);
+        console.log(error)
         res.status(500).send({
-            status: "Failed",
-            message: "Server Error",
-        });
+            status: 'Failed',
+            message: 'Server Error'
+        })
     }
 }
 
 // -------------------- LOGIN --------------------
 
-exports.login = async (req, res) => {
+exports.login = async ( req, res ) => {
     try {
+        
         const { email, password } = req.body
+        const path = process.env.PATH_UPLOAD
 
         const schema = Joi.object({
             email: Joi.string().email().required(),
             password: Joi.string().required(),
-        });
-      
+        })
+
         const { error } = schema.validate(req.body);
       
         if (error) {
@@ -104,21 +100,19 @@ exports.login = async (req, res) => {
         }
 
         const emailExist = await user.findOne({
-            where : {
-                email
-            }
+            where: { email }
         })
 
-        if (!emailExist){
+        if(!emailExist){
             return res.send({
                 status: 'failed',
                 message: "Email and Password don't match"
             })
         }
 
-        const isValidPassword = await bcrypt.compare(password, emailExist.password)
+        const isValid = await bcrypt.compare(password, emailExist.password)
 
-        if (!isValidPassword) {
+        if (!isValid) {
             return res.send({
                 status: 'failed',
                 message: "Email and Password don't match"
@@ -126,54 +120,55 @@ exports.login = async (req, res) => {
         }
 
         const secretKey = process.env.SECRET_KEY
-
         const token = jwt.sign(
             {
                 id: emailExist.id,
-                role: emailExist.is_admin
+                role: emailExist.role
             },
             secretKey
         )
 
-        res.send({
-            status : 'success',
-            data : {
+        res.status(200).send({
+            status: 'Success',
+            data: {
                 user: {
                     id: emailExist.id,
                     fullName: emailExist.fullName,
                     email: emailExist.email,
-                    avatar: emailExist.avatar,
-                    role: emailExist.is_admin,
+                    avatar: path + emailExist.avatar,
+                    role: emailExist.role,
                     token
-                  },
+                }
             }
         })
-        
+
     } catch (error) {
-        console.log(error);
+        console.log(error)
         res.status(500).send({
-            status: "Failed",
-            message: "Server Error",
-        });
+            status: 'Failed',
+            message: 'Server Error'
+        })
     }
 }
 
-// -------------------- AUTH --------------------
+// -------------------- CHECK AUTH --------------------
 
-exports.authUser = async (req, res) => {
+exports.authUser = async ( req, res ) => {
     try {
-        const id = req.userId
 
-        const datauser = await user.findOne({
+        const path = process.env.PATH_UPLOAD
+        const { userId } = req
+
+        const dataUser = await user.findOne({
             where: {
-                id
+                id: userId
             },
             attributes: {
                 exclude: ["createdAt", "updateAt", "password"]
             }
         })
 
-        if(!datauser){
+        if(!dataUser){
             return res.status(404).send({
                 status: 'Failed',
                 message: 'user not found'
@@ -182,14 +177,13 @@ exports.authUser = async (req, res) => {
 
         res.status(200).send({
             status: 'Success',
-            data : {
+            data: {
                 user: {
-                    id: datauser.id,
-                    fullName: datauser.fullName,
-                    email: datauser.email,
-                    avatar: datauser.avatar,
-                    phone: datauser.phone,
-                    role: datauser.is_admin,
+                    id: dataUser.id,
+                    fullName: dataUser.fullName,
+                    email: dataUser.email,
+                    avatar: path + dataUser.avatar,
+                    role: dataUser.role
                 }
             }
         })

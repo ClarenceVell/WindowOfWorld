@@ -13,6 +13,7 @@ import subcribeRed from '../assets/billRed.png'
 import logout from '../assets/logout.png'
 
 function SideProfile({page}) {
+
   return (
     <div className='profile-container'>
         <Link to={'/'}>
@@ -48,7 +49,7 @@ function SideProfile({page}) {
             </Link>
             <hr />
 
-            <Link to={'/auth'} className='link-bar' >
+            <Link to={'/logout'} className='link-bar' >
                 <img className='icon-bar' src={logout} alt="User Icon" />
                 <span className='span-bar'>Logout</span>
             </Link>

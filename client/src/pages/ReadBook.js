@@ -1,11 +1,15 @@
-import {useState} from 'react'
-import { useNavigate } from 'react-router-dom'
+import {useState, useEffect} from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+
+import { API } from '../helpers/config/api'
 
 import { ReactReader, ReactReaderStyle } from "react-reader"
 
 function ReadBook() {
-
+  
+  const { id } = useParams()
   const navigate = useNavigate()
+
   const [location, setLocation] = useState(null)
   const locationChanged = (epubcifi) => {
     setLocation(epubcifi)
@@ -19,6 +23,24 @@ function ReadBook() {
     }
   }
 
+  const [ detail, setDetail ] = useState({})
+
+  // -------- Load Book --------
+  const detailBook = async () => {
+    try {
+      const response = await API.get(`/book/${id}`)
+      setDetail(response.data.data.detail)
+      console.log(detail)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    detailBook()
+  }, [])
+
+
   return (
     <div >
       <div className='read-con'>
@@ -28,10 +50,10 @@ function ReadBook() {
       <div style={{ height: '100vh', position:'relative'}}>
         <ReactReader
           styles={ownStyles}
-          title='Alice In Wonderland'
+          title={detail.title}
           location={location}
           locationChanged={locationChanged}
-          url="https://gerhardsletten.github.io/react-reader/files/alice.epub"
+          url={detail?.bookFile}
         />
       </div>
     </div>

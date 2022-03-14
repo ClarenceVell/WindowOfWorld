@@ -11,6 +11,22 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      user.hasMany(models.transaction, {
+        as:"transaction",
+        foreignKey: {
+          name: "idUser"
+        }
+      })
+
+      user.belongsToMany(models.book, {
+        as:"book", 
+        through: {
+          model:"booklist",
+          as: "bridge"
+        },
+        foreignKey: "idUser"
+      })
+
     }
   }
   user.init({
@@ -18,12 +34,12 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     fullName: DataTypes.STRING,
     gender: DataTypes.STRING,
-    phone: DataTypes.INTEGER,
-    address: DataTypes.STRING,
+    phone: DataTypes.STRING,
+    address: DataTypes.TEXT,
     avatar: DataTypes.STRING,
-    is_admin: {
+    role: {
       type: DataTypes.INTEGER,
-      defaultValue: 0,
+      defaultValue: 0
     }
   }, {
     sequelize,

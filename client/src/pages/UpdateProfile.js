@@ -28,6 +28,11 @@ function UpdateProfile() {
         }
     }
 
+    const handleSubmit = (async (e) => {
+        e.preventDefault()
+        navigate('/profile')
+    })
+
   return (
     <div>
       <div className='read-con'>
@@ -35,7 +40,7 @@ function UpdateProfile() {
       </div>
 
       <div className=' d-flex justify-content-center mt-5'>
-        <form className='d-flex justify-content-between update-form'>
+        <form className='d-flex justify-content-between update-form' onSubmit={handleSubmit}>
             <div className='d-flex flex-column inp-div'>
             <h2>Update Profile</h2>
                 <input 
@@ -79,11 +84,12 @@ function UpdateProfile() {
                 <img 
                     className='edit-avatar'
                     src={preview? preview : Default}
-                    alt="Avatar" 
+                    alt="icon" 
                 />
                 <input 
                     type="file" 
                     name="avatar" 
+                    onChange={handleOnChange}
                     id="file-inp" 
                     hidden
                 />

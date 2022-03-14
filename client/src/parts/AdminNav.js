@@ -12,7 +12,7 @@ function AdminNav() {
   const navigate = useNavigate()
 
   const toHome = () => navigate('/transaction')
-  const toLogout = () => navigate('/auth')
+  const toLogout = () => navigate('/logout')
   const toAdd = () => navigate('/add')
 
   return (
