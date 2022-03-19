@@ -50,7 +50,7 @@ router.get('/myList', auth, myList)
 const { addSubs, getTransactions, updateTransaction, check } = require('../controllers/transaction')
 
 router.post('/subscribe', auth, uploadFile('transferProof'), addSubs)
-router.get('/subscribes', getTransactions)
+router.get('/subscribes', admin, getTransactions)
 router.patch('/transaction/:id', updateTransaction)
 
 

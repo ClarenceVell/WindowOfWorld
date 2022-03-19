@@ -9,10 +9,12 @@ import Home from './pages/Home';
 import Detail from './pages/Detail';
 import Profile from './pages/Profile';
 import Subscribe from './pages/Subscribe';
-import AddBook from './pages/AddBook';
-import Transaction from './pages/Transaction';
+import AddBook from './pages/Admin/AddBook';
+import DetailBookAdmin from './pages/Admin/DetailBookAdmin';
+import Transaction from './pages/Admin/Transaction';
 import ReadBook from './pages/ReadBook';
 import UpdateProfile from './pages/UpdateProfile';
+import AdminHome from './pages/Admin/AdminHome';
 import Logout from './helpers/Logout';
 
 import { API, setAuthToken } from './helpers/config/api';
@@ -23,18 +25,22 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
+
 function App() {
   const navigate = useNavigate()
 
   const [state, dispatch] = useContext(UserContext)
 
   useEffect(() => {
-    if(state.login == false){
+
+    if(!state.login){
       navigate('/auth')
-    }else if (state.user.role == 0) {
-      navigate('/')
-    } else {
-      navigate('/transaction')
+    } else{
+      if(state.user.role === 0){
+        navigate('/')
+      } else {
+        navigate('/admin')
+      }
     }
   },[state])
 
@@ -55,6 +61,7 @@ function App() {
           type: "success",
           payload,
         });
+
       } else {
         let payload = response.data.data.user;
         payload.token = localStorage.token;
@@ -63,6 +70,7 @@ function App() {
           payload,
         });
       }
+
     } catch (error) {
       console.log(error);
       dispatch({
@@ -87,7 +95,9 @@ function App() {
         <Route exact path='/add' element={<AddBook/>} />
         <Route exact path='/transaction' element={<Transaction/>} />
         <Route exact path='/read/:id' element={<ReadBook/>} />
-        <Route exact path='/edit-profile' element={<UpdateProfile/>} />
+        <Route exact path='/edit-profile/:id' element={<UpdateProfile/>} />
+        <Route exact path='/detail-admin/:id' element={<DetailBookAdmin/>} />
+        <Route exact path='/admin' element={<AdminHome/>} />
         <Route exact path='/logout' element={<Logout/>} />
         <Route exact path='*' element={<NotFound/>} />
       </Routes>

@@ -4,7 +4,7 @@ exports.auth = (req, res, next) => {
   try {
     let header = req.header("Authorization");
 
-    let token = header.replace("Bearer ", "");
+    let token = header.replace("Bearer ", ""); 
 
     if (!header || !token) {
       return res.send({

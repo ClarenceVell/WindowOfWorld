@@ -1,6 +1,7 @@
-import {React} from 'react'
+import {useContext} from 'react'
 
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../helpers/context/userContext'
 
 import { Container, Navbar, Dropdown} from 'react-bootstrap'
 
@@ -10,8 +11,9 @@ import add from '../assets/add.svg'
 
 function AdminNav() {
   const navigate = useNavigate()
+  const [state]= useContext(UserContext)
 
-  const toHome = () => navigate('/transaction')
+  const toHome = () => navigate('/admin')
   const toLogout = () => navigate('/logout')
   const toAdd = () => navigate('/add')
 
@@ -28,6 +30,15 @@ function AdminNav() {
             </Dropdown.Toggle>
 
             <Dropdown.Menu className='dropdown-menu' align={{ sm:'end'}} >
+            <Dropdown.Item 
+                className='fw-bold txt'
+                onClick={() => navigate('/transaction')} >
+                  <img src={add} alt="icon" height={'22px'} /> &nbsp; 
+                  Transactions
+              </Dropdown.Item>
+
+              <Dropdown.Divider />
+
               <Dropdown.Item 
                 className='fw-bold txt'
                 onClick={toAdd} >

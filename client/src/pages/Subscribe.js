@@ -4,14 +4,40 @@ import { Modal } from 'react-bootstrap'
 
 import SideProfile from '../parts/SideProfile'
 
+import { API } from '../helpers/config/api'
+
 function Subscribe() {
     const [popup, setPopup] = useState(false)
 
     const popupOpen = () => setPopup(true)
     const popupClose = () => setPopup(false)
 
+    const [form, setForm] = useState({
+        transferProof: ''
+    })
+
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.type === "file" ? e.target.files : e.target.value
+        })
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        const config = {
+            headers: {
+                "Content-type": "multipart/form-data"
+            }
+        }
+
+        const formData = new FormData()
+        formData.set("transferProof", form.transferProof[0], form.transferProof[0].name)
+
+        const response = await API.post('/subscribe', formData, config)
+        console.log(response)
+
         popupOpen()
     }
 
@@ -35,11 +61,11 @@ function Subscribe() {
 
                 <form className='subs-form' onSubmit={handleSubmit}>
                     <input 
-                        type="number" 
-                        name="" 
+                        type="number"  
                         placeholder='Input your account number' 
+                        required
                     />
-                    <input type="file" name="" id="file" hidden />
+                    <input type="file" name='transferProof' onChange={handleChange} id="file" hidden required />
                     <label htmlFor="file" className='payment'>
                         Attache proof of transfer &nbsp;
                         <img src="/images/attache.svg" alt="icon" height={'20px'} />

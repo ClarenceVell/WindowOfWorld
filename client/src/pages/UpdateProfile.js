@@ -1,5 +1,7 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+
+import { API } from '../helpers/config/api'
 
 import Default from '../assets/transparant.png'
 
@@ -7,14 +9,36 @@ function UpdateProfile() {
     const [preview, setPreview] = useState('')
 
     const navigate = useNavigate()
+    const { id } = useParams()
 
     const [form, setForm] = useState({
-        email: 'egi@gmail.com',
-        gender: 'Male',
-        phone: '081286238911',
-        address: 'Perumahan Permata Bintaro Residence C-3',
+        email: '',
+        gender: '',
+        phone: '',
+        address: '',
         avatar:''
     })
+
+    // -------- Get Profile --------
+    const getProfile = async () => {
+        try {
+            const response = await API.get(`/user/${id}`)
+            setPreview(response.data.data.user.avatar)
+
+            setForm({
+                email: response.data.data.user.email,
+                gender: response.data.data.user.gender,
+                phone: response.data.data.user.phone,
+                address: response.data.data.user.address,
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getProfile()
+    }, [])
 
     const handleOnChange = (e) => {
         setForm({
@@ -30,7 +54,25 @@ function UpdateProfile() {
 
     const handleSubmit = (async (e) => {
         e.preventDefault()
-        navigate('/profile')
+
+        const config = {
+            headers: {
+                "Content-type" : "multipart/form-data"
+            }
+        }
+
+        const formData = new FormData()
+        formData.set("email", form.email)
+        formData.set("gender", form.gender)
+        formData.set("phone", form.phone)
+        formData.set("address", form.address)
+        if (form.avatar) {
+            formData.set("avatar", form?.avatar[0], form?.avatar[0]?.name);
+        }
+
+        const data = await API.patch(`/user/${id}`, formData, config)
+
+        navigate(`/profile/${id}`)
     })
 
   return (
@@ -60,7 +102,7 @@ function UpdateProfile() {
                 />
 
                 <input 
-                    type="number" 
+                    type="text" 
                     name='phone'
                     value={form.phone}
                     onChange={handleOnChange}

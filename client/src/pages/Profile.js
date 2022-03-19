@@ -75,7 +75,7 @@ function Profile() {
               <div className='photo-div'>
                 {profile.phone == null ? <img src={noImage} alt="profile" /> : <img src={profile.avatar} alt="profile" /> }
                 {/* <img src={[profile.avatar === null ? noImage : profile.avatar]} alt="profile" /> */}
-                <button onClick={() => navigate('/edit-profile')} className='btn'>Edit Profile</button>
+                <button onClick={() => navigate(`/edit-profile/${id}`)} className='btn'>Edit Profile</button>
               </div>
             </div>
             

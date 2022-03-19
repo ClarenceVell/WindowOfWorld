@@ -341,6 +341,7 @@
 
 .content-book{
   margin-top: 40px;
+  margin-right: 100px;
 }
 
 .content-book > p{
@@ -352,8 +353,9 @@
 .button-detail-group{
   display: flex;
   justify-content: flex-end;
-  margin-right: 45px;
+  margin-right: 100px;
   margin-top: 35px;
+  margin-bottom: 40px;
 }
 
 .button-detail-group > button:first-child{
@@ -367,12 +369,24 @@
   height: 40px;
 }
 
+.button-detail-group > button:nth-child(3){
+  width: 185px;
+  height: 40px;
+  display: flex;
+  color: #000;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: rgba(240, 243, 54, 0.979);
+}
+
 .button-detail-group > button:nth-child(2){
   width: 185px;
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: bold;
   text-align: center;
   background: rgba(205, 205, 205, 0.7);
 }
@@ -628,6 +642,12 @@
   border-radius: 5px;
 }
 
+.preview-add{
+  margin-bottom: 20px;
+  width: 150px;
+  height: 200px;
+}
+
 /* ------------------ Transaction Pages ------------------ */
 
 .trans-con{
@@ -758,4 +778,11 @@ th{
   padding: 8px;
   border-radius: 5px;
   margin-top: 14px;
+}
+
+/* ------------------ Admin Home Pages ------------------ */
+
+.books{
+  display: flex;
+  flex-wrap: wrap;
 }

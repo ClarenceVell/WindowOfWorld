@@ -134,6 +134,7 @@ exports.login = async ( req, res ) => {
                 user: {
                     id: emailExist.id,
                     fullName: emailExist.fullName,
+                    phone: emailExist.phone,
                     email: emailExist.email,
                     avatar: path + emailExist.avatar,
                     role: emailExist.role,
@@ -181,6 +182,7 @@ exports.authUser = async ( req, res ) => {
                 user: {
                     id: dataUser.id,
                     fullName: dataUser.fullName,
+                    phone: dataUser.phone,
                     email: dataUser.email,
                     avatar: path + dataUser.avatar,
                     role: dataUser.role

@@ -41,21 +41,21 @@ function SignIn({show, handleClose, handleShow, toggle}) {
 
       if (response.data.data.user.role === 0) {
 
-        return [ dispatch(
+        return dispatch(
           {
             type: "login",
             payload: response.data.data.user,
           }
-        ), navigate('/')]
+        )
 
       } else {
 
-        return [ dispatch(
+        return dispatch(
           {
             type: "admin",
             payload: response.data.data.user,
           }
-        ), navigate('/transaction')]
+        )
 
       }
 

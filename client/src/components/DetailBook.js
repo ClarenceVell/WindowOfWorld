@@ -1,15 +1,17 @@
 import { useState, useEffect, useContext } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-// import { addBook } from '../../../server/src/controllers/book' 
+import { useParams, useNavigate } from 'react-router-dom' 
 
 import addIcon from '../assets/add.png'
 import nextIcon from '../assets/V.png'
 
 import { API } from '../helpers/config/api'
+import { UserContext } from '../helpers/context/userContext'
 
 function DetailBook() {
+
   const navigate = useNavigate()
   const { id } = useParams()
+  const [state] = useContext(UserContext)
   
   const [ detail, setDetail ] = useState({})
 
@@ -24,9 +26,48 @@ function DetailBook() {
     }
   }
 
+  const [list, setList] = useState([])
+
+  // -------- Load Book List --------
+  const getList = async () => {
+    try {
+      const response = await API.get('/myList')
+      setList(response.data.myList)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  let buttonList = list.filter((item) => {
+    return item.id == id
+  })
+
   useEffect(() => {
     detailBook()
+    getList()
   }, [])
+
+  // -------- Handle Submit Add List --------
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+
+      const config = {
+        headers: {
+          "Content-type": "application/json"
+        }
+      }
+
+      const body = JSON.stringify({ idBook: id })
+
+      const response = await API.post('/bookList', body, config)
+
+      navigate(`/profile/${state.user.id}`)
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <>
@@ -53,11 +94,19 @@ function DetailBook() {
 
       <div className='button-detail-group'>
 
-        {/* { id != Mylist[id -1].id ? 
-          <button onClick={() => navigate('/profile')} className='btn'>Add to My List &nbsp; <img src={addIcon} alt="icon" /> </button>
-        : null} */}
+            {state.user.role === 0 ? 
+                buttonList.length == 1 ? 
+                    null
+                    : <button onClick={handleSubmit} className='btn'>Add to My List &nbsp; <img src={addIcon} alt="icon" /> </button>
+                :
+                (
+                  <>
+                  <button className='btn'> Delete Book &nbsp; <img src={addIcon} alt="icon" /> </button>
+                  <button className='btn'> Update Book &nbsp; <img src={addIcon} alt="icon" /> </button>
+                  </>
+                )
+            }
 
-        <button onClick={() => navigate('/profile')} className='btn'>Add to My List &nbsp; <img src={addIcon} alt="icon" /> </button>
         <button onClick={() => navigate(`/read/${id}`)} className='btn'>Read Book &nbsp; <img src={nextIcon} alt="icon" /></button>
       </div>
     </>

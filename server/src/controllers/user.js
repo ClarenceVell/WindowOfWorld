@@ -13,14 +13,14 @@ exports.getUsers = async ( req, res) => {
             }
         })
 
-        users = JSON.parse(JSON.stringify(users)); 
+        // users = JSON.parse(JSON.stringify(users)); 
 
-        users = users.map((item)=> {
-            return {
-                ...item,
-                avatar : path + item.avatar
-            }
-        })
+        // users = users.map((item)=> {
+        //     return {
+        //         ...item,
+        //         avatar : path + item.avatar
+        //     }
+        // })
 
         res.status(200).send({
             status: 'Success',

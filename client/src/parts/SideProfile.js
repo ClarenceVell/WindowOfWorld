@@ -1,10 +1,9 @@
-import { useContext } from 'react'
-
-import profile from '../assets/zaynn.jpg'
+import { useContext, useEffect, useState } from 'react'
 
 import { Link } from 'react-router-dom'
 
 import { UserContext } from '../helpers/context/userContext'
+import { API } from '../helpers/config/api'
 
 import user from '../assets/user.png'
 import userRed from '../assets/userRed.png'
@@ -13,10 +12,26 @@ import subcribe from '../assets/bill.png'
 import subcribeRed from '../assets/billRed.png'
 
 import logout from '../assets/logout.png'
+import photo from '../assets/noname.png'
 
 function SideProfile({page}) {
 
     const [ state ] = useContext(UserContext)
+    const [profile, setProfile] = useState({})
+
+    // -------- Get Profile --------
+    const getProfile = async () => {
+        try {
+            const response = await API.get(`/user/${state.user.id}`)
+            setProfile(response.data.data.user)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getProfile()
+    }, [])
 
   return (
     <div className='profile-container'>
@@ -24,9 +39,9 @@ function SideProfile({page}) {
             <img src="/images/Icon.png" alt="" />
         </Link>
         <div className='circle'>
-            <img src={profile} alt="" />
+            <img src={!profile.phone ? photo : profile.avatar} alt="profile" />
         </div>
-        <p>Egi Ganteng</p>
+        <p>{profile.fullName}</p>
 
         {page === 'detail' ? (
             <p className='green'>Subscribed</p>

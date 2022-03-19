@@ -36,16 +36,14 @@ exports.addSubs = async ( req, res ) => {
 exports.getTransactions = async ( req, res ) => {
     try {
 
-        const transactions = await transaction.findAll({
+        let transactions = await transaction.findAll({
             attributes: {
                 exclude: [ 'idUser','createdAt', 'updatedAt']
             },
             include : {
                 model: user,
                 as: 'user',
-                attributes: {
-                    exclude: [ 'password','createdAt', 'updatedAt']
-                }
+                attributes: ['id', 'fullName', 'email']
             }
         })
 
@@ -122,7 +120,7 @@ exports.updateTransaction = async (req, res) => {
               await transaction.update(
                 {
                   ...getTransaction,
-                  remainingActive: remainingActiveUser
+                  remainingActive: remainingActiveUser - 1
                 },
                 {
                   where: {
@@ -131,7 +129,7 @@ exports.updateTransaction = async (req, res) => {
                 }
               )
               // Substrac remaining active
-              remainingActive = remainingActive - 1;
+              // remainingActive = remainingActive - 1;
             }
 
           })
