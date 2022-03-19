@@ -103,32 +103,18 @@ exports.updateProfile = async ( req, res ) => {
     
         const dataUpdated = {
             ...body,
-            avatar : req.files.avatar[0].filename
+            avatar : req?.files?.avatar[0]?.filename
         };
 
         const data = await user.update(dataUpdated, {
             where : { id }
         })
-
-        let updateUser = await user.findOne({
-            where: {
-                id,
-            },
-            attributes: {
-                exclude: ["updatedAt", "createdAt", "password"],
-            },
-        });
-
-        updateUser = JSON.parse(JSON.stringify(updateUser)); 
-
-        updateUser = {
-            ...updateUser,
-            avatar : path + updateUser.avatar
-        }
         
         res.status(200).send({
             status: "success",
-            data: { user: updateUser },
+            data: {
+                dataUpdated
+            }
         });
 
     } catch (error) {

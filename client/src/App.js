@@ -11,6 +11,7 @@ import Profile from './pages/Profile';
 import Subscribe from './pages/Subscribe';
 import AddBook from './pages/Admin/AddBook';
 import DetailBookAdmin from './pages/Admin/DetailBookAdmin';
+import UpdateBook from './pages/Admin/UpdateBook';
 import Transaction from './pages/Admin/Transaction';
 import ReadBook from './pages/ReadBook';
 import UpdateProfile from './pages/UpdateProfile';
@@ -97,6 +98,7 @@ function App() {
         <Route exact path='/read/:id' element={<ReadBook/>} />
         <Route exact path='/edit-profile/:id' element={<UpdateProfile/>} />
         <Route exact path='/detail-admin/:id' element={<DetailBookAdmin/>} />
+        <Route exact path='/edit-book/:id' element={<UpdateBook/>} />
         <Route exact path='/admin' element={<AdminHome/>} />
         <Route exact path='/logout' element={<Logout/>} />
         <Route exact path='*' element={<NotFound/>} />

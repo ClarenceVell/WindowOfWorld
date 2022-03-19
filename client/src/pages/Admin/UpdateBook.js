@@ -1,0 +1,171 @@
+import { useState, useEffect } from 'react'
+import { API } from '../../helpers/config/api'
+
+import { useNavigate, useParams } from 'react-router-dom'
+
+import AdminNav from '../../parts/AdminNav'
+
+function UpdateBook() {
+
+    const navigate= useNavigate()
+    const { id } = useParams()
+
+    const [preview, setPreview] = useState(null)
+
+    const [form, setForm] = useState({
+        title: '',
+        publicationDate: '',
+        pages: '',
+        author: '',
+        isbn: '',
+        about: '',
+        cover: '',
+        bookFile: ''
+    })
+
+    // ---------- Get Book ----------
+    const getBook = async () => {
+        try {
+            const response = await API.get(`/book/${id}`)
+            setPreview(response.data.data.detail.cover)
+
+            setForm({
+                title: response.data.data.detail.title,
+                publicationDate: response.data.data.detail.publicationDate,
+                pages: response.data.data.detail.pages,
+                author: response.data.data.detail.author,
+                isbn: response.data.data.detail.isbn,
+                about: response.data.data.detail.about,
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getBook()
+    }, [])
+
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.type === "file" ? e.target.files : e.target.value,
+        });
+
+        // Create image url for preview
+        if (e.target.name === "cover") {
+            let url = URL.createObjectURL(e.target.files[0]);
+            setPreview(url);
+        }
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const config = {
+            headers: {
+              "Content-type": "multipart/form-data"
+            }
+          }
+
+          const formData = new FormData()
+          formData.set('title', form.title)
+          formData.set('publicationDate', form.publicationDate)
+          formData.set('pages', form.pages)
+          formData.set('author', form.author)
+          formData.set('isbn', form.isbn)
+          formData.set('about', form.about)
+          formData.set('cover', form.cover[0], form.cover[0].name)
+          formData.set('bookFile', form.bookFile[0], form.bookFile[0].name)
+
+          const response = await API.patch(`/book/${id}`, formData, config)
+          console.log(response)
+
+          navigate('/admin')
+
+    }
+
+  return (
+    <div>
+        <AdminNav/>
+        <div className='add'>
+            <h3>Update Book</h3>
+            <form className='add-form' onSubmit={handleSubmit}>
+                <input 
+                    type="text" 
+                    name="title" 
+                    value={form.title}
+                    placeholder='Title' 
+                    onChange={handleChange} required 
+                />
+                <input 
+                    type="text" 
+                    name="publicationDate" 
+                    value={form.publicationDate}
+                    placeholder='Publication Date' 
+                    onChange={handleChange} 
+                    required
+                />
+                <input 
+                    type="number" 
+                    name="pages" 
+                    value={form.pages}
+                    placeholder='Pages' 
+                    onChange={handleChange} 
+                    required
+                />
+                <input 
+                    type="text" 
+                    name="author" 
+                    value={form.author}
+                    placeholder='Author' 
+                    onChange={handleChange} 
+                    required 
+                />
+                <input 
+                    type="number" 
+                    name="isbn" 
+                    value={form.isbn}
+                    placeholder='ISBN' 
+                    onChange={handleChange} 
+                    required
+                />
+                <textarea 
+                    name="about"  
+                    value={form.about}
+                    cols="30" rows="10" 
+                    placeholder='About This Book' 
+                    onChange={handleChange}
+                ></textarea>
+
+                <img src={preview} alt="preview" className='preview-add' />  
+
+                <div className='file-div'>
+                    <input type="file" name='cover' id="inputFile" onChange={handleChange} hidden />
+                    <label htmlFor="inputFile" className=' me-3 book-file'>
+                        Attache Cover &nbsp;
+                        <img src="/images/attach.png" alt="icon" height={'20px'}/>
+                    </label>
+
+                    <input type="file" name='bookFile' id="bookInput" onChange={handleChange} hidden />
+                    <label htmlFor="bookInput" className=' book-file' >
+                        Attache Book File &nbsp;
+                        <img src="/images/attach.png" alt="icon" height={'20px'}/>
+                    </label>
+
+                </div>
+
+                <div className='button-add'>
+                    <button className='btn add-button' type='submit'>
+                        Update Book &nbsp;
+                        <img src="/images/Add.png" alt="icon" />
+                    </button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+  )
+}
+
+export default UpdateBook

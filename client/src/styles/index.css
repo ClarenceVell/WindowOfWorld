@@ -37,9 +37,9 @@ span {
 }
 
 .btn, .btn:hover{
-  border-color: unset;
-  outline: none;
-  border: 0;
+  border-color: unset !important;
+  outline: none !important;
+  border: 0 !important;
   font-family: "Nunito", sans-serif;
   box-shadow: unset !important;
 }

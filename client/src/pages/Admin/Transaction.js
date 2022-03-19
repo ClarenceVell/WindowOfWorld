@@ -40,6 +40,8 @@ function Transaction() {
 
             const response = await API.patch('transaction/' + id, body, config)
 
+            getTransactions()
+
         } catch (error) {
             console.log(error)
         }
@@ -59,6 +61,8 @@ function Transaction() {
             const body = JSON.stringify({ paymentStatus: 'Cancel' })
 
             const response = await API.patch('transaction/' + id, body, config)
+
+            getTransactions()
 
         } catch (error) {
             console.log(error)

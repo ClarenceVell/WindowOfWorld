@@ -1,11 +1,16 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { API } from '../helpers/config/api'
+import { UserContext } from '../helpers/context/userContext'
 
 import { ReactReader, ReactReaderStyle } from "react-reader"
 
 function ReadBook() {
+
+  const [state] = useContext(UserContext)
+  const userHome = () => navigate('/')
+  const adminHome = () => navigate('/admin')
   
   const { id } = useParams()
   const navigate = useNavigate()
@@ -36,15 +41,27 @@ function ReadBook() {
     }
   }
 
+  const [profile, setProfile] = useState({})
+
+   // -------- Get Profile --------
+   const getProfile = async () => {
+    try {
+        const response = await API.get(`/user/${state.user.id}`)
+        setProfile(response.data.data.user)
+    } catch (error) {
+        console.log(error)
+    }
+  }
+
   useEffect(() => {
     detailBook()
+    getProfile()
   }, [])
-
 
   return (
     <div >
       <div className='read-con'>
-        <img onClick={() => navigate('/')} src="/images/Icon.png" alt="Logo" width={'85px'} height={'75px'} />
+        <img onClick={profile.role == 0 ? userHome : adminHome} src="/images/Icon.png" alt="Logo" width={'85px'} height={'75px'} />
       </div>
 
       <div style={{ height: '100vh', position:'relative'}}>

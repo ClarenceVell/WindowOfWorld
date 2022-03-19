@@ -57,7 +57,7 @@ function AddBook() {
           const response = await API.post('/book', formData, config)
           console.log(response)
 
-          navigate('/transaction')
+          navigate('/admin')
 
     }
 

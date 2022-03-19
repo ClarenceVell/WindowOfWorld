@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom' 
+import { Modal, Button } from 'react-bootstrap'
 
 import addIcon from '../assets/add.png'
 import nextIcon from '../assets/V.png'
@@ -20,7 +21,7 @@ function DetailBook() {
     try {
       const response = await API.get(`/book/${id}`)
       setDetail(response.data.data.detail)
-      console.log(detail)
+      // console.log(detail)
     } catch (error) {
       console.log(error)
     }
@@ -47,6 +48,32 @@ function DetailBook() {
     getList()
   }, [])
 
+  // ---------- MODAL ----------
+    const [show, setShow] = useState(false)
+
+    const closeModal = () => setShow(false)
+    const openModal = () => setShow(true)
+
+  // ---------- Handle Delete Book ----------
+  const deleteBook = async () => {
+    try {
+      const response = await API.delete(`/book/${id}`)
+      navigate('/admin')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // ---------- Handle Delete List ----------
+  const deleteList = async () => {
+    try {
+      const fact = await API.delete(`/myList/${id}`)
+      getList()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   // -------- Handle Submit Add List --------
   const handleSubmit = async (e) => {
     try {
@@ -62,15 +89,26 @@ function DetailBook() {
 
       const response = await API.post('/bookList', body, config)
 
-      navigate(`/profile/${state.user.id}`)
+      getList()
       
     } catch (error) {
       console.log(error)
     }
+
   }
 
   return (
     <>
+    <Modal centered show={show} onHide={closeModal} dialogClassName='modal-detail' >
+      <Modal.Body>
+        <h4 className='text-center'>Are you sure to delete {detail.title} ?</h4> 
+        <div className='d-flex justify-content-center mt-3'>
+          <Button onClick={closeModal} className='btn btn-delete me-3'>No</Button>
+          <Button onClick={deleteBook} className='btn btn-delete'>Yes</Button>
+        </div>
+      </Modal.Body>
+    </Modal>
+
       <div className='detail-book'>
         <div>
           <img src={detail.cover} alt="" />
@@ -96,13 +134,14 @@ function DetailBook() {
 
             {state.user.role === 0 ? 
                 buttonList.length == 1 ? 
-                    null
-                    : <button onClick={handleSubmit} className='btn'>Add to My List &nbsp; <img src={addIcon} alt="icon" /> </button>
+                <button onClick={deleteList} className='btn'>Delete from My List &nbsp; <img src={addIcon} alt="icon" /> </button>
+                  : 
+                <button onClick={handleSubmit} className='btn'>Add to My List &nbsp; <img src={addIcon} alt="icon" /> </button>
                 :
                 (
                   <>
-                  <button className='btn'> Delete Book &nbsp; <img src={addIcon} alt="icon" /> </button>
-                  <button className='btn'> Update Book &nbsp; <img src={addIcon} alt="icon" /> </button>
+                  <button className='btn' onClick={openModal}> Delete Book &nbsp; <img src={addIcon} alt="icon" /> </button>
+                  <button className='btn' onClick={() => navigate(`/edit-book/${id}`)}> Update Book &nbsp; <img src={addIcon} alt="icon" /> </button>
                   </>
                 )
             }

@@ -1,11 +1,12 @@
-import {useContext} from 'react'
+import {useContext, useState, useEffect} from 'react'
 
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../helpers/context/userContext'
+import { API } from '../helpers/config/api'
 
 import { Container, Navbar, Dropdown} from 'react-bootstrap'
 
-import admin from '../assets/photo.png'
+import admin from '../assets/noname.png'
 import logout from '../assets/logout.svg'
 import add from '../assets/add.svg'
 
@@ -17,6 +18,22 @@ function AdminNav() {
   const toLogout = () => navigate('/logout')
   const toAdd = () => navigate('/add')
 
+  const [profile, setProfile] = useState({})
+
+   // -------- Get Profile --------
+   const getProfile = async () => {
+    try {
+        const response = await API.get(`/user/${state.user.id}`)
+        setProfile(response.data.data.user)
+    } catch (error) {
+        console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getProfile()
+  }, [])
+
   return (
     <Navbar bg="light">
       <Container className='d-flex justify-content-between'>
@@ -26,7 +43,7 @@ function AdminNav() {
         <div>
           <Dropdown>
             <Dropdown.Toggle className='dropdown'>
-              <img className='drop-img' src={admin} alt="" />
+              <img className='drop-img' src={profile.phone ? profile.avatar : admin} alt="" />
             </Dropdown.Toggle>
 
             <Dropdown.Menu className='dropdown-menu' align={{ sm:'end'}} >

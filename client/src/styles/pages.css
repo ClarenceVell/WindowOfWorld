@@ -365,7 +365,7 @@
   background-color: #D60000;
   color: #fff;
   margin-right: 10px;
-  width: 185px;
+  width: 195px;
   height: 40px;
 }
 
@@ -383,12 +383,25 @@
 .button-detail-group > button:nth-child(2){
   width: 185px;
   height: 40px;
+  margin-right: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
   text-align: center;
   background: rgba(205, 205, 205, 0.7);
+}
+
+.btn-delete:nth-child(1){
+  width: 100px;
+  background-color: #D60000;
+  color: #fff;
+}
+
+.btn-delete:nth-child(2){
+  width: 100px;
+  background-color: #BDBDBD;
+  color: #000;
 }
 
 /* ------------------ Profile Pages ------------------ */

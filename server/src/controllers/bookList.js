@@ -87,3 +87,26 @@ exports.myList = async ( req, res ) => {
     }
 }
 
+// -------------------- DELETE BOOK LIST --------------------
+
+exports.removeBook = async ( req, res ) => {
+    try {
+        const { id } = req.params
+
+        await bookList.destroy({
+            where : { idBook: id }
+        })
+
+        res.status(200).send({
+            status: 'Success',
+            id
+        })
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            status: 'Failed',
+            message: 'Server Error'
+        })
+    }
+}

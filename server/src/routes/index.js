@@ -40,10 +40,12 @@ router.patch('/book/:id', uploadFile('cover', 'bookFile'), updateBook)
 
 // ---------------------- BOOK LIST ----------------------
 
-const { addList, myList } = require('../controllers/bookList')
+const { addList, myList, removeBook } = require('../controllers/bookList')
 
 router.post('/bookList', auth, addList)
 router.get('/myList', auth, myList)
+router.delete(`/myList/:id`, auth, removeBook)
+
 
 // ---------------------- TRANSACTION ----------------------
 
