@@ -17,17 +17,24 @@ import photo from '../assets/noname.png'
 function SideProfile({page}) {
 
     const [ state ] = useContext(UserContext)
-    const [profile, setProfile] = useState({})
+    const [profile, setProfile] = useState([])
+    const [transaction, setTrans] = useState([])
 
     // -------- Get Profile --------
     const getProfile = async () => {
         try {
             const response = await API.get(`/user/${state.user.id}`)
             setProfile(response.data.data.user)
+            setTrans(response.data.data.user.transaction)
+
         } catch (error) {
             console.log(error)
         }
     }
+
+    let status = transaction.filter((item)=> {
+        return item.userStatus == "Active"
+    })
 
     useEffect(() => {
         getProfile()
@@ -43,7 +50,7 @@ function SideProfile({page}) {
         </div>
         <p>{profile.fullName}</p>
 
-        {page === 'detail' ? (
+        {status.length == 1 ? (
             <p className='green'>Subscribed</p>
         ) : (
             <p className='red'>Not Subscribed Yet</p>

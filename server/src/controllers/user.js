@@ -1,4 +1,4 @@
-const { user } = require('../../models')
+const { user, transaction } = require('../../models')
 
 // -------------------- GET USERS --------------------
 
@@ -50,6 +50,13 @@ exports.getUser = async ( req, res ) => {
             where: { id },
             attributes: {
                 exclude: ["createdAt", "updatedAt", "password"]
+            },
+            include: {
+                model: transaction,
+                as: "transaction",
+                attributes: {
+                    exclude: ["createdAt", "updatedAt", "idUser"]
+                }
             }
         })
 

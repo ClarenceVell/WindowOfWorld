@@ -12,7 +12,7 @@ function NotFound() {
         <h1 className='notTitle'>Page Not Found!</h1>
 
         <div  className='notButtonDiv'>
-            <Link to={'/'}>
+            <Link to={'/auth'}>
                 <button  className='notButton'>Back to Home</button>
             </Link>
         </div>
