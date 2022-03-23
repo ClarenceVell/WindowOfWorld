@@ -23,6 +23,9 @@ function ListBook() {
       }
   }
 
+//   let bookList = book.reverse()
+//   console.log(bookList)
+
   const [ state ] = useContext(UserContext)
   const [transaction, setTrans] = useState([])
 

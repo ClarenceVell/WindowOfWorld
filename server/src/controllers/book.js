@@ -81,6 +81,8 @@ exports.getBooks = async (req, res) => {
             }
         })
 
+        data = data.reverse()
+
         res.status(200).send({
             status: 'Success',
             data: {

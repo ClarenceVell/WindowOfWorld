@@ -73,6 +73,8 @@ exports.myList = async ( req, res ) => {
             }
         })
 
+        list = list.reverse()
+
         res.status(200).send({
             status: 'Success',
             myList: list
