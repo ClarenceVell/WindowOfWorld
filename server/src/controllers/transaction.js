@@ -1,7 +1,6 @@
 const { user, transaction } = require('../../models')
 
 const cron = require("node-cron")
-// const { date } = require('joi')
 
 // -------------------- ADD TRANSACTION --------------------
 
@@ -68,8 +67,6 @@ exports.updateTransaction = async (req, res) => {
       const { id } = req.params;
 
       if (req.body.paymentStatus === "Approved"){
-        //inisiate remaining active variable
-        let remainingActiveUser = 29;
 
         // get time now
         const hours = new Date().getHours();
@@ -90,6 +87,9 @@ exports.updateTransaction = async (req, res) => {
           
           //Update remaining active
           const task = cron.schedule(`${seconds} ${minutes} ${hours} * * *`, async () => {
+
+            //inisiate remaining active variable
+            let remainingActiveUser = 29;
 
             //get data transaction
             let getTransaction = await transaction.findOne({
@@ -120,7 +120,7 @@ exports.updateTransaction = async (req, res) => {
               await transaction.update(
                 {
                   ...getTransaction,
-                  remainingActive: remainingActiveUser - 1
+                  remainingActive: remainingActiveUser 
                 },
                 {
                   where: {
@@ -129,7 +129,7 @@ exports.updateTransaction = async (req, res) => {
                 }
               )
               // Substrac remaining active
-              // remainingActive = remainingActive - 1;
+              remainingActive = remainingActive - 1;
             }
 
           })
@@ -166,7 +166,6 @@ exports.updateTransaction = async (req, res) => {
   
       res.status(200).send({
         status: "Success",
-        message: `Update transaction id: ${id} finished`,
         data: {
             transaction: newTransaction
         }
