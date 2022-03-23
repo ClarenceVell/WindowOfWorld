@@ -26,6 +26,7 @@ function SideProfile({page}) {
             const response = await API.get(`/user/${state.user.id}`)
             setProfile(response.data.data.user)
             setTrans(response.data.data.user.transaction)
+            console.log(response)
 
         } catch (error) {
             console.log(error)

@@ -34,6 +34,7 @@ function DetailBook() {
     try {
       const response = await API.get('/myList')
       setList(response.data.myList)
+      console.log(response)
     } catch (error) {
       console.log(error)
     }

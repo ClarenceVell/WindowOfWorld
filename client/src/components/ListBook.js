@@ -3,8 +3,9 @@ import { useState, useEffect, useContext } from 'react'
 import { API } from '../helpers/config/api'
 import { UserContext } from '../helpers/context/userContext'
 import { useNavigate } from 'react-router-dom'
+import ShowMoreText from "react-show-more-text";
 
-import { Modal } from 'react-bootstrap'
+import NotactiveModal from './NotactiveModal'
 
 function ListBook() {
 
@@ -44,7 +45,6 @@ function ListBook() {
 
     const popupOpen = () => setPopup(true)
     const popupClose = () => setPopup(false)
-    // const todetail= () => navigate(`/detail/${id}`)
 
 
   useEffect(() => {
@@ -56,11 +56,7 @@ function ListBook() {
   return (
     <>
 
-    <Modal centered show={popup} onHide={popupClose}>
-        <div className='home-modal'>
-            <p> Please make a payment to read the lastest book</p>
-        </div>
-    </Modal>
+    <NotactiveModal popup={popup} popupClose={popupClose}/> 
 
     <div className='listBook'>
         <h1>List Book</h1>
@@ -69,9 +65,17 @@ function ListBook() {
             {book.map((body, index) =>{
                 return(
                     <>
-                    <div className='list-link' onClick={status.length == 0? popupOpen: () => navigate(`/detail/${body.id}`)}>
+                    <div key={index} className='list-link' onClick={status.length == 0? popupOpen: () => navigate(`/detail/${body.id}`)}>
                         <img className='book-img' src={body.cover} alt="Book Cover" />
-                        <h5 className='mt-3'>{body.title}</h5>
+                        <ShowMoreText
+                          lines={1}
+                          more=""
+                          className='mt-3 fs-5'
+                          width={250}
+                          truncatedEndingComponent={"..."}
+                        >
+                          <h5>{body.title}</h5>
+                        </ShowMoreText>
                         <p>{body.author}</p>
                     </div>
                     </>

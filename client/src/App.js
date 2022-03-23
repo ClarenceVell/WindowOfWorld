@@ -80,8 +80,10 @@ function App() {
     }
   };
 
+
   useEffect(() => {
     authUser();
+    console.log(state)
   }, []);
 
 

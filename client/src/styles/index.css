@@ -109,9 +109,9 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .alert-info{
-  width: 100%;
+  width: 95%;
 }
 
 .alert-danger{
-  width: 100%;
+  width: 95%;
 }

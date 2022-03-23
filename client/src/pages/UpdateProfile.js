@@ -126,11 +126,12 @@ function UpdateProfile() {
                 <img 
                     className='edit-avatar'
                     src={preview? preview : Default}
-                    alt="icon" 
+                    alt="Select Photo" 
                 />
                 <input 
                     type="file" 
                     name="avatar" 
+                    // value={form.avatar}
                     onChange={handleOnChange}
                     id="file-inp" 
                     hidden
