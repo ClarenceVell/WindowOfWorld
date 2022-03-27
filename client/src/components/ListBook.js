@@ -44,10 +44,12 @@ function ListBook() {
       return item.userStatus == "Active"
   })
 
-    const [popup, setPopup] = useState(false)
+  // ---------- MODAL ----------
 
-    const popupOpen = () => setPopup(true)
-    const popupClose = () => setPopup(false)
+  const [popup, setPopup] = useState(false)
+
+  const popupOpen = () => setPopup(true)
+  const popupClose = () => setPopup(false)
 
 
   useEffect(() => {

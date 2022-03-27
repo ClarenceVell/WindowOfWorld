@@ -25,6 +25,7 @@ function MyList() {
 
   const [ state ] = useContext(UserContext)
   const [transaction, setTrans] = useState([])
+
   // -------- Get Profile --------
   const getProfile = async () => {
     try {
@@ -34,11 +35,14 @@ function MyList() {
     } catch (error) {
         console.log(error)
     }
-}
+ }
 
-let status = transaction.filter((item)=> {
-    return item.userStatus == "Active"
-})
+  let status = transaction.filter((item)=> {
+      return item.userStatus == "Active"
+  })
+
+
+  // ---------- MODAL ----------
 
   const [popup, setPopup] = useState(false)
 

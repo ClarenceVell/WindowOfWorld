@@ -65,31 +65,29 @@ exports.getTransactions = async ( req, res ) => {
 exports.updateTransaction = async (req, res) => {
     try {
       const { id } = req.params;
-
+      
       if (req.body.paymentStatus === "Approved"){
-
-        // get time now
-        const hours = new Date().getHours();
-        const minutes = new Date().getMinutes();
-        const seconds = new Date().getSeconds();
         
-          //first update
-          await transaction.update(
-            {
-              remainingActive: 30,
-              userStatus: "Active",
-              paymentStatus: req.body.paymentStatus,
-            },
-            {
-              where: { id },
-            },
+        //first update
+        await transaction.update(
+          {
+            remainingActive: 30,
+            userStatus: "Active",
+            paymentStatus: req.body.paymentStatus,
+          },
+          {
+            where: { id },
+          },
           );
           
-          //Update remaining active
-          const task = cron.schedule(`${seconds} ${minutes} ${hours} * * *`, async () => {
+          //inisiate remaining active variable
+          let remainingActiveUser = 29;
+          console.log(remainingActiveUser)
 
-            //inisiate remaining active variable
-            let remainingActiveUser = 29;
+
+          //Update remaining active
+          const task = cron.schedule(`59 59 23 * * *`, async () => {
+
 
             //get data transaction
             let getTransaction = await transaction.findOne({
@@ -127,9 +125,10 @@ exports.updateTransaction = async (req, res) => {
                     id
                   }
                 }
-              )
-              // Substrac remaining active
-              remainingActive = remainingActive - 1;
+                )
+                // Substrac remaining active
+                remainingActiveUser = remainingActiveUser - 1;
+                console.log(remainingActiveUser)
             }
 
           })
