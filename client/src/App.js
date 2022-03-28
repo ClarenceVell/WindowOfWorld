@@ -17,6 +17,7 @@ import ReadBook from './pages/ReadBook';
 import UpdateProfile from './pages/UpdateProfile';
 import AdminHome from './pages/Admin/AdminHome';
 import Logout from './helpers/Logout';
+import PrivateRoute from './parts/PrivateRoute';
 
 import { API, setAuthToken } from './helpers/config/api';
 import { UserContext } from './helpers/context/userContext';
@@ -95,13 +96,17 @@ function App() {
         <Route exact path='/detail/:id' element={<Detail/>} />
         <Route exact path='/profile/:id' element={<Profile/>} />
         <Route exact path='/Subscribe' element={<Subscribe/>} />
-        <Route exact path='/add' element={<AddBook/>} />
-        <Route exact path='/transaction' element={<Transaction/>} />
         <Route exact path='/read/:id' element={<ReadBook/>} />
         <Route exact path='/edit-profile/:id' element={<UpdateProfile/>} />
-        <Route exact path='/detail-admin/:id' element={<DetailBookAdmin/>} />
-        <Route exact path='/edit-book/:id' element={<UpdateBook/>} />
-        <Route exact path='/admin' element={<AdminHome/>} />
+
+        <Route exact path='/' element={<PrivateRoute/>}>
+          <Route exact path='/add' element={<AddBook/>} />
+          <Route exact path='/transaction' element={<Transaction/>} />
+          <Route exact path='/detail-admin/:id' element={<DetailBookAdmin/>} />
+          <Route exact path='/edit-book/:id' element={<UpdateBook/>} />
+          <Route exact path='/admin' element={<AdminHome/>} />
+        </Route>
+
         <Route exact path='/logout' element={<Logout/>} />
         <Route exact path='*' element={<NotFound/>} />
       </Routes>

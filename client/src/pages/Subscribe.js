@@ -5,6 +5,7 @@ import { Modal } from 'react-bootstrap'
 import SideProfile from '../parts/SideProfile'
 
 import { API } from '../helpers/config/api'
+import swal from 'sweetalert'
 
 function Subscribe() {
     const [popup, setPopup] = useState(false)
@@ -24,21 +25,27 @@ function Subscribe() {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        try {
 
-        const config = {
-            headers: {
-                "Content-type": "multipart/form-data"
+            e.preventDefault()
+
+            const config = {
+                headers: {
+                    "Content-type": "multipart/form-data"
+                }
             }
+
+            const formData = new FormData()
+            formData.set("transferProof", form.transferProof[0], form.transferProof[0].name)
+
+            const response = await API.post('/subscribe', formData, config)
+            console.log(response)
+
+            popupOpen()
+            
+        } catch (error) {
+            swal({title: 'Please Submit Proof of Payment', text: 'Submit with image file', icon: 'warning'})
         }
-
-        const formData = new FormData()
-        formData.set("transferProof", form.transferProof[0], form.transferProof[0].name)
-
-        const response = await API.post('/subscribe', formData, config)
-        console.log(response)
-
-        popupOpen()
     }
 
   return (
@@ -65,7 +72,7 @@ function Subscribe() {
                         placeholder='Input your account number' 
                         required
                     />
-                    <input type="file" name='transferProof' onChange={handleChange} id="file" hidden required />
+                    <input type="file" name='transferProof' onChange={handleChange} id="file" hidden />
                     <label htmlFor="file" className='payment'>
                         Attache proof of transfer &nbsp;
                         <img src="/images/attache.svg" alt="icon" height={'20px'} />

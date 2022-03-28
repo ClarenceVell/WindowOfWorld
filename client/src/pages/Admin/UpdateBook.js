@@ -75,8 +75,13 @@ function UpdateBook() {
           formData.set('author', form.author)
           formData.set('isbn', form.isbn)
           formData.set('about', form.about)
-          formData.set('cover', form.cover[0], form.cover[0].name)
-          formData.set('bookFile', form.bookFile[0], form.bookFile[0].name)
+          if(form.cover){
+            formData.set('cover', form?.cover[0], form?.cover[0]?.name)
+          }
+
+          if(form.bookFile){
+            formData.set('bookFile', form?.bookFile[0], form?.bookFile[0]?.name)
+          }
 
           const response = await API.patch(`/book/${id}`, formData, config)
           console.log(response)

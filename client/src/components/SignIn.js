@@ -6,6 +6,7 @@ import { Modal } from 'react-bootstrap'
 
 import { API, setAuthToken } from '../helpers/config/api'
 import { UserContext } from '../helpers/context/userContext'
+import swal from 'sweetalert'
 
 
 function SignIn({show, handleClose, handleShow, toggle}) {
@@ -39,15 +40,18 @@ function SignIn({show, handleClose, handleShow, toggle}) {
       setMessage(response.data.message);
       setAuthToken(response.data.data.user.token);
 
+      
       if (response.data.data.user.role === 0) {
-
-        return dispatch(
+        
+        return [dispatch(
           {
             type: "login",
             payload: response.data.data.user,
           }
-        )
-
+        ),
+          swal('Your login success',{title: 'Welcome to Window of World', buttons: false, timer: 1500 ,icon: 'success'})
+        ]
+          
       } else {
 
         return dispatch(
@@ -58,7 +62,6 @@ function SignIn({show, handleClose, handleShow, toggle}) {
         )
 
       }
-
 
     } catch (error) {
       console.log(error);

@@ -115,3 +115,13 @@ input[type="number"]::-webkit-outer-spin-button {
 .alert-danger{
   width: 95%;
 }
+
+.swal-title{
+  color: rgb(253, 100, 100);
+  font-weight: bold;
+}
+
+.swal-text{
+  font-weight: 600;
+  font-size: 18px;
+}
